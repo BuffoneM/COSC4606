@@ -183,6 +183,7 @@ public class JDBCDriver {
 			System.out.println("Issue with getClassList(): " + e.getMessage());
 		}
 	}
+	
 	// Display a student transcript:
 	public void clientGetStudentTranscript() {
 		getStudentTranscript();
