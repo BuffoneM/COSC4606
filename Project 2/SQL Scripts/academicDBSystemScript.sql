@@ -36,7 +36,7 @@ CREATE TABLE `course_enrollment` (
 
 LOCK TABLES `course_enrollment` WRITE;
 /*!40000 ALTER TABLE `course_enrollment` DISABLE KEYS */;
-INSERT INTO `course_enrollment` VALUES ('COSC1046','110617644','1'),('COSC1046','113192860','1'),('COSC1046','119352673','1'),('COSC1047','126293548','1'),('COSC1047','135001493','2'),('COSC1047','142531308','1'),('COSC2006','164399245','3'),('COSC2007','172525649','1'),('COSC2007','177252841','1'),('COSC2007','179918802','2'),('COSC2406','149514909','2'),('COSC2406','179918802','2'),('COSC2406','184072320','1'),('COSC2406','184225365','1'),('COSC2406','190801497','2');
+INSERT INTO `course_enrollment` VALUES ('COSC1046','110617644','1'),('COSC1046','113192860','1'),('COSC1046','119352673','1'),('COSC1047','126293548','1'),('COSC1047','135001493','2'),('COSC1047','142531308','1'),('COSC2006','164399245','3'),('COSC2007','172525649','1'),('COSC2007','179918802','2'),('COSC2406','149514909','2'),('COSC2406','179918802','2'),('COSC2406','184072320','1'),('COSC2406','184225365','1'),('COSC2406','190801497','2');
 /*!40000 ALTER TABLE `course_enrollment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +114,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES ('206284373','Devon','Quinn','230-737-3077'),('210504553','Stephanus','Gilardone','746-643-1620'),('214563309','Bjorn','Housaman','511-641-9471'),('224606575','Shoshanna','Regenhardt','516-134-9933'),('226049793','Stacie','Sauter','977-839-6980'),('227683175','Saunders','Ravenshear','181-172-8827'),('230726780','Phineas','Fynes','454-677-5688'),('234380854','Mela','Lochrie','154-435-7280'),('244361995','Aldus','Sargerson','641-725-8280'),('263545560','Wildon','Pladen','106-424-6469'),('267219418','Jewel','Kittiman','263-723-3480'),('273432073','Elwyn','Screeton','453-625-3601'),('274479751','Kelli','Jeduch','320-587-6284'),('277841714','Shaun','Greated','853-886-8527'),('280281430','Fin','Earengey','286-719-4344'),('283579427','Riobard','Heather','682-605-0555'),('290012791','Fields','Arkley','800-673-9742'),('295983049','Jeremias','Ragsdall','384-393-5336'),('296583945','Lorrie','Sollam','695-588-1211'),('299492855','Archibaldo','Cruddace','834-228-8375'),('987654321','Test','Staff','555-555-3333');
+INSERT INTO `employee` VALUES ('206284373','Devon','Quinn','230-737-3077'),('206284374','javaTest','javaLastJava','230-187-8998'),('210504553','Stephanus','Gilardone','746-643-1620'),('214563309','Bjorn','Housaman','511-641-9471'),('224606575','Shoshanna','Regenhardt','516-134-9933'),('226049793','Stacie','Sauter','977-839-6980'),('227683175','Saunders','Ravenshear','181-172-8827'),('230726780','Phineas','Fynes','454-677-5688'),('234380854','Mela','Lochrie','154-435-7280'),('244361995','Aldus','Sargerson','641-725-8280'),('263545560','Wildon','Pladen','106-424-6469'),('267219418','Jewel','Kittiman','263-723-3480'),('273432073','Elwyn','Screeton','453-625-3601'),('274479751','Kelli','Jeduch','320-587-6284'),('277841714','Shaun','Greated','853-886-8527'),('280281430','Fin','Earengey','286-719-4344'),('283579427','Riobard','Heather','682-605-0555'),('290012791','Fields','Arkley','800-673-9742'),('295983049','Jeremias','Ragsdall','384-393-5336'),('296583945','Lorrie','Sollam','695-588-1211'),('299492855','Archibaldo','Cruddace','834-228-8375'),('987654321','Test','Staff','555-555-3333');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +132,7 @@ CREATE TABLE `student` (
   `phone_number` varchar(45) DEFAULT NULL,
   `program_name` varchar(45) DEFAULT NULL,
   `term_Status` varchar(45) DEFAULT NULL,
-  `co-op` int DEFAULT NULL,
+  `coop` int DEFAULT NULL,
   `full_or_part` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`student_id`),
   UNIQUE KEY `student_id_UNIQUE` (`student_id`)
@@ -145,7 +145,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES ('102092066','Auroora','Seal','812-919-9575','B.Sc.4 COSC','0',1,'full'),('110617644','Shelden','Wilshere','676-785-2186','B.Sc.4 COSC','1',1,'full'),('111222333','Test','Student','123-999-0000','B.Sc.4 COSC','1',1,'full'),('113192860','Corabella','Folkerts','976-781-4135','B.Sc.4 COSC','1',0,'full'),('119352673','Edgardo','Duffield','238-831-3473','B.Sc.4 COSC','1',1,'full'),('126293548','Lina','McMichell','594-152-7101','B.Sc.3 COSC','1',1,'full'),('133706887','Mervin','Meriel','982-499-7103','B.Sc.4 COSC','0',0,'full'),('135001493','Shirley','Birchill','451-589-3285','B.Sc.4 COSC','1',1,'full'),('135490765','Retha','Keeves','266-986-1108','B.Sc.4 CHEM','0',0,'part'),('142531308','Cristy','Udie','522-232-2502','B.Sc.4 CHEM','1',1,'full'),('149514909','Wye','Malt','269-174-2488','B.Sc.4 CHEM','1',0,'full'),('158900905','Pammi','Dalston','791-690-5034','B.Sc.4 COSC','0',0,'full'),('164399245','Lindsey','Michelle','161-448-9685','B.Sc.3 COSC','1',1,'part'),('165816940','Lezley','Dodworth','165-259-5954','B.Sc.3 COSC','0',1,'part'),('172525649','Etti','Bradnick','470-871-4905','B.Sc.4 COSC','1',1,'full'),('172681923','Nickolas','Faldo','873-908-2033','B.Sc.4 COSC','0',0,'full'),('177252841','Ermengarde','Camm','660-560-2504','B.Sc.4 COSC','1',0,'full'),('179918802','Martyn','Minifie','433-467-6818','B.Sc.4 COSC','1',1,'full'),('184072320','Ralf','Auden','691-458-3117','B.Sc.3 COSC','1',0,'part'),('184225365','Vinson','Trathen','372-653-9784','B.Sc.4 COSC','1',1,'full'),('190801497','Solomon','Tyce','512-308-5927','B.Sc.4 CHEM','1',0,'full');
+INSERT INTO `student` VALUES ('102092066','Auroora','Seal','812-919-9575','B.Sc.4 COSC','0',1,'full'),('102092067','javastufirst','asd','710-281-5777','B.Sc.4 COSC','1',0,'full'),('110617644','Shelden','Wilshere','676-785-2186','B.Sc.4 COSC','1',1,'full'),('111222333','Test','Student','123-999-0000','B.Sc.4 COSC','1',1,'full'),('113192860','Corabella','Folkerts','976-781-4135','B.Sc.4 COSC','1',0,'full'),('119352673','Edgardo','Duffield','238-831-3473','B.Sc.4 COSC','1',1,'full'),('126293548','Lina','McMichell','594-152-7101','B.Sc.3 COSC','1',1,'full'),('133706887','Mervin','Meriel','982-499-7103','B.Sc.4 COSC','0',0,'full'),('135001493','Shirley','Birchill','451-589-3285','B.Sc.4 COSC','1',1,'full'),('135490765','Retha','Keeves','266-986-1108','B.Sc.4 CHEM','0',0,'part'),('142531308','Cristy','Udie','522-232-2502','B.Sc.4 CHEM','1',1,'full'),('149514909','Wye','Malt','269-174-2488','B.Sc.4 CHEM','1',0,'full'),('158900905','Pammi','Dalston','791-690-5034','B.Sc.4 COSC','0',0,'full'),('164399245','Lindsey','Michelle','161-448-9685','B.Sc.3 COSC','1',1,'part'),('165816940','Lezley','Dodworth','165-259-5954','B.Sc.3 COSC','0',1,'part'),('172525649','Etti','Bradnick','470-871-4905','B.Sc.4 COSC','1',1,'full'),('172681923','Nickolas','Faldo','873-908-2033','B.Sc.4 COSC','0',0,'full'),('177252841','Ermengarde','Camm','660-560-2504','B.Sc.4 COSC','1',0,'full'),('179918802','Martyn','Minifie','433-467-6818','B.Sc.4 COSC','1',1,'full'),('184072320','Ralf','Auden','691-458-3117','B.Sc.3 COSC','1',0,'part'),('184225365','Vinson','Trathen','372-653-9784','B.Sc.4 COSC','1',1,'full'),('190801497','Solomon','Tyce','512-308-5927','B.Sc.4 CHEM','1',0,'full');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +171,7 @@ CREATE TABLE `student_grades` (
 
 LOCK TABLES `student_grades` WRITE;
 /*!40000 ALTER TABLE `student_grades` DISABLE KEYS */;
-INSERT INTO `student_grades` VALUES ('126293548','COSC1046','1','87'),('135001493','COSC1046','1','23'),('142531308','COSC1046','2','Dropped'),('149514909','COSC1047','1','51'),('149514909','COSC1047','1','72'),('149514909','COSC2006','3','90'),('164399245','COSC1047','1','94'),('172525649','COSC2006','3','83'),('177252841','COSC2006','3','88'),('179918802','COSC2006','3','65'),('184072320','COSC1047','1','95'),('184225365','COSC1047','1','86'),('190801497','COSC2006','3','95');
+INSERT INTO `student_grades` VALUES ('126293548','COSC1046','1','65'),('135001493','COSC1046','1','23'),('142531308','COSC1046','2','Dropped'),('149514909','COSC1047','1','51'),('149514909','COSC1047','1','72'),('149514909','COSC2006','3','90'),('164399245','COSC1047','1','94'),('172525649','COSC2006','3','83'),('177252841','COSC2006','3','88'),('179918802','COSC2006','3','65'),('184072320','COSC1047','1','95'),('184225365','COSC1047','1','86'),('190801497','COSC2006','3','95');
 /*!40000 ALTER TABLE `student_grades` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -184,4 +184,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-25 22:11:50
+-- Dump completed on 2021-11-26 20:52:31

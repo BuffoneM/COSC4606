@@ -164,10 +164,12 @@ public class JDBCDriver {
 		{
 			Statement test = dbConnection.createStatement();
 			ResultSet returnSet = test.executeQuery(
-					"SELECT student.last_name, student.first_name, student.full_or_part, student.co-op, course_info.course_id, course_info.term, course_info.section_id " +
+					"SELECT student.last_name, student.first_name, student.full_or_part, student.coop, course_info.course_id, course_info.term, course_info.section_id " +
 					"FROM course_info " +
 					"INNER JOIN course_enrollment ON course_info.course_id=course_enrollment.course_id " + 
-					"INNER JOIN student ON course_enrollment.student_id=student.student_id;"
+					"INNER JOIN student ON course_enrollment.student_id=student.student_id " +
+					"WHERE course_info.course_id='" + courseID + "' AND course_info.section_id='" + sectionID + "' AND course_info.term='" + term + "' " +
+					"ORDER BY student.last_name, student.first_name;"
 					);
 			while (returnSet.next()) {
 				System.out.println(returnSet.getString(1) + ", " + 
@@ -185,86 +187,175 @@ public class JDBCDriver {
 	}
 	
 	// Display a student transcript:
-	public void clientGetStudentTranscript() {
-		getStudentTranscript();
+	public void clientGetStudentTranscript(String stuID) {
+		getStudentTranscript(stuID);
 	}
 	
-	private void getStudentTranscript() {
+	private void getStudentTranscript(String stuID) {
 		try
 		{
-			Statement test = dbConnection.createStatement();
-			ResultSet returnSet = test.executeQuery(
-					"SELECT student.last_name, student.first_name, student.full_or_part, student.co-op, course_info.course_id, course_info.term, course_info.section_id " +
-					"FROM course_info " +
-					"INNER JOIN course_enrollment ON course_info.course_id=course_enrollment.course_id " + 
-					"INNER JOIN student ON course_enrollment.student_id=student.student_id;"
-					);
-			while (returnSet.next()) {
-				System.out.println(returnSet.getString(1) + ", " + 
-									returnSet.getString(2) + ", " +
-									returnSet.getString(3) + ", " +
-									returnSet.getString(4) + ", " +
-									returnSet.getString(5) + ", " +
-									returnSet.getString(6) + ", " +
-									returnSet.getString(7));
-			}
+			System.out.println("Course Enrollment:");
+			getStudentTranscript_CourseEnrollment(stuID);
+			
+			System.out.println("\nAll Grades:");
+			getStudentTranscript_AllGrades(stuID);
+			
+			System.out.println("\nMax Grades:");
+			getStudentTranscript_MaxGrades(stuID);
+			
+			System.out.println("\nTerm Average Grades:");
+			getStudentTranscript_TermAvgGrades(stuID);
 		}
 		catch(Exception e) {
 			System.out.println("Issue with getStudentTranscript(): " + e.getMessage());
 		}
 	}
-	// Display a table of all students enrolled in a given degree program:
-	public void clientGetStudentsInProgram() {
-		getStudentsInProgram();
-	}
 	
-	private void getStudentsInProgram() {
+	// Helper 1 of transcript
+	private void getStudentTranscript_CourseEnrollment(String stuID) {
 		try
 		{
 			Statement test = dbConnection.createStatement();
+			
 			ResultSet returnSet = test.executeQuery(
-					"SELECT student.last_name, student.first_name, student.full_or_part, student.co-op, course_info.course_id, course_info.term, course_info.section_id " +
-					"FROM course_info " +
-					"INNER JOIN course_enrollment ON course_info.course_id=course_enrollment.course_id " + 
-					"INNER JOIN student ON course_enrollment.student_id=student.student_id;"
+					"SELECT course_enrollment.student_id, course_enrollment.course_id, course_enrollment.section_id " +
+					"FROM course_enrollment WHERE course_enrollment.student_id='" + stuID + "' " +
+					"ORDER BY course_enrollment.student_id, course_enrollment.course_id, course_enrollment.section_id;"
+					);
+			while (returnSet.next()) {
+				System.out.println(returnSet.getString(1) + ", " + 
+									returnSet.getString(2) + ", " +
+									returnSet.getString(3));
+			}
+		}
+		catch(Exception e) {
+			System.out.println("Issue with getStudentTranscript_CourseEnrollment(): " + e.getMessage());
+		}
+	}
+	
+	// Helper 2 of transcript
+	private void getStudentTranscript_AllGrades(String stuID) {
+		try
+		{
+			Statement test = dbConnection.createStatement();
+			
+			ResultSet returnSet = test.executeQuery(
+					"SELECT student_grades.student_id, student_grades.course_id, student_grades.section_id, student_grades.grade " +
+					"FROM student_grades WHERE student_grades.student_id='" + stuID + "';"
 					);
 			while (returnSet.next()) {
 				System.out.println(returnSet.getString(1) + ", " + 
 									returnSet.getString(2) + ", " +
 									returnSet.getString(3) + ", " +
-									returnSet.getString(4) + ", " +
-									returnSet.getString(5) + ", " +
-									returnSet.getString(6) + ", " +
-									returnSet.getString(7));
+									returnSet.getString(4));
+			}
+		}
+		catch(Exception e) {
+			System.out.println("Issue with getStudentTranscript_AllGrades(): " + e.getMessage());
+		}
+	}
+	
+	// Helper 3 of transcript
+	private void getStudentTranscript_MaxGrades(String stuID) {
+		try
+		{
+			Statement test = dbConnection.createStatement();
+			
+			ResultSet returnSet = test.executeQuery(
+					"SELECT student_grades.student_id, student_grades.course_id, student_grades.section_id, MAX(student_grades.grade) " +
+					"FROM student_grades " +
+					"WHERE student_grades.student_id='" + stuID + "' " +
+					"GROUP BY student_grades.course_id " +
+					"ORDER BY student_grades.student_id, student_grades.course_id, student_grades.section_id;"
+					);
+			while (returnSet.next()) {
+				System.out.println(returnSet.getString(1) + ", " + 
+									returnSet.getString(2) + ", " +
+									returnSet.getString(3) + ", " +
+									returnSet.getString(4));
+			}
+		}
+		catch(Exception e) {
+			System.out.println("Issue with getStudentTranscript_MaxGrades(): " + e.getMessage());
+		}
+	}	
+	
+	// Helper 4 of transcript
+	private void getStudentTranscript_TermAvgGrades(String stuID) {
+		try
+		{
+			Statement test = dbConnection.createStatement();
+			
+			ResultSet returnSet = test.executeQuery(
+					"SELECT student_grades.student_id, student_grades.course_id, student_grades.section_id, AVG(student_grades.grade) " +
+					"FROM student_grades " +
+					"WHERE student_grades.student_id='" + stuID + "' " +
+					"GROUP BY student_grades.course_id " +
+					"ORDER BY AVG(student_grades.grade) DESC;"
+					);
+			while (returnSet.next()) {
+				System.out.println(returnSet.getString(1) + ", " + 
+									returnSet.getString(2) + ", " +
+									returnSet.getString(3) + ", " +
+									returnSet.getString(4));
+			}
+		}
+		catch(Exception e) {
+			System.out.println("Issue with getStudentTranscript_TermAvgGrades(): " + e.getMessage());
+		}
+	}
+	
+	// Display a table of all students enrolled in a given degree program:
+	public void clientGetStudentsInProgram(String proName) {
+		getStudentsInProgram(proName);
+	}
+	
+	private void getStudentsInProgram(String proName) {
+		try
+		{
+			Statement test = dbConnection.createStatement();
+			ResultSet returnSet = test.executeQuery(
+					"SELECT student.last_name, student.first_name, student.student_id, student.program_name " +
+					"FROM student " + 
+					"WHERE student.program_name='" + proName + "' " +
+					"ORDER BY student.last_name, student.first_name, student.student_id, student.program_name;"
+					);
+			while (returnSet.next()) {
+				System.out.println(returnSet.getString(1) + ", " + 
+									returnSet.getString(2) + ", " +
+									returnSet.getString(3) + ", " +
+									returnSet.getString(4));
 			}
 		}
 		catch(Exception e) {
 			System.out.println("Issue with getStudentsInProgram(): " + e.getMessage());
 		}
 	}
+	
 	// Display the all instructors teaching a course to some student:
-	public void clientGetInstructorsForSpecificStudent() {
-		getInstructorsForSpecificStudent();
+	public void clientGetInstructorsForSpecificStudent(String stuID, String term) {
+		getInstructorsForSpecificStudent(stuID, term);
 	}
 	
-	private void getInstructorsForSpecificStudent() {
+	private void getInstructorsForSpecificStudent(String stuID, String term) {
 		try
 		{
 			Statement test = dbConnection.createStatement();
 			ResultSet returnSet = test.executeQuery(
-					"SELECT student.last_name, student.first_name, student.full_or_part, student.co-op, course_info.course_id, course_info.term, course_info.section_id " +
-					"FROM course_info " +
-					"INNER JOIN course_enrollment ON course_info.course_id=course_enrollment.course_id " + 
-					"INNER JOIN student ON course_enrollment.student_id=student.student_id;"
+					"SELECT employee.last_name, employee.first_name, course_info.course_id, employee.phone_number " +
+					"FROM student " +
+					"INNER JOIN course_enrollment ON student.student_id=course_enrollment.student_id " + 
+					"INNER JOIN course_info ON course_enrollment.course_id=course_info.course_id " +
+					"INNER JOIN course_staff ON course_enrollment.course_id=course_staff.course_id " +
+					"INNER JOIN employee ON course_staff.employee_number=employee.employee_number " +
+					"WHERE student.student_id='" + stuID + "' AND course_info.term='" + term + "' " +
+					"ORDER BY employee.last_name, employee.first_name, course_info.course_id, employee.phone_number;"
 					);
 			while (returnSet.next()) {
 				System.out.println(returnSet.getString(1) + ", " + 
 									returnSet.getString(2) + ", " +
 									returnSet.getString(3) + ", " +
-									returnSet.getString(4) + ", " +
-									returnSet.getString(5) + ", " +
-									returnSet.getString(6) + ", " +
-									returnSet.getString(7));
+									returnSet.getString(4));
 			}
 		}
 		catch(Exception e) {
@@ -273,28 +364,26 @@ public class JDBCDriver {
 	}
 	
 	// Display a list of all courses taught by a faculty member:
-	public void clientGetCoursesByFaculty() {
-		getCoursesByFaculty();
+	public void clientGetCoursesByFaculty(String empNum, String term) {
+		getCoursesByFaculty(empNum, term);
 	}
 	
-	private void getCoursesByFaculty() {
+	private void getCoursesByFaculty(String empNum, String term) {
 		try
 		{
 			Statement test = dbConnection.createStatement();
 			ResultSet returnSet = test.executeQuery(
-					"SELECT student.last_name, student.first_name, student.full_or_part, student.co-op, course_info.course_id, course_info.term, course_info.section_id " +
-					"FROM course_info " +
-					"INNER JOIN course_enrollment ON course_info.course_id=course_enrollment.course_id " + 
-					"INNER JOIN student ON course_enrollment.student_id=student.student_id;"
+					"SELECT course_info.term, course_info.course_id, course_info.course_name, course_staff.employee_number " +
+					"FROM course_staff " +
+					"INNER JOIN course_info ON course_staff.course_id=course_info.course_id " + 
+					"WHERE course_staff.employee_number='" + empNum + "' AND course_info.term='" + term + "' " +
+					"ORDER BY course_info.term, course_info.course_id, course_info.course_name, course_staff.employee_number;"
 					);
 			while (returnSet.next()) {
 				System.out.println(returnSet.getString(1) + ", " + 
 									returnSet.getString(2) + ", " +
 									returnSet.getString(3) + ", " +
-									returnSet.getString(4) + ", " +
-									returnSet.getString(5) + ", " +
-									returnSet.getString(6) + ", " +
-									returnSet.getString(7));
+									returnSet.getString(4));
 			}
 		}
 		catch(Exception e) {
@@ -302,41 +391,3 @@ public class JDBCDriver {
 		}
 	}
 }
-
-/*
-//Establish the connection to the database
-		try
-		{
-			dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/academicdb", "root", "K@7p$K5#^nvEC795");
-			Statement test = dbConnection.createStatement();
-			ResultSet testSet = test.executeQuery("select * from course_enrollment;");
-			while (testSet.next()) {
-				System.out.println(testSet.getString(1) + ", " + 
-									testSet.getString(2) + ", " +
-									testSet.getString(3));
-			}
-		}
-		catch(Exception e) {
-			System.out.println(e.getStackTrace());
-		}
-*/
-
-//****** Queries ******
-
-	// Returns a class list when given a course id, section id, and term.
-	
-	// Returns all of the courses taught by a staff member when given an employee number and a term.
-	
-	// Returns all instructor information for a given student id and a term.
-	
-	// Returns all students in a given program.
-	
-	// Sub-report Section
-	
-	// -Returns all course ids and section ids for a given student id.
-
-	// -Returns all course ids, section ids, and grades for a given student id.
-	
-	// -Returns the max grade for all course ids and section ids when given a student id.
-	
-	// -Returns the average grade for a student in all terms.
