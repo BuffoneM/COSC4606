@@ -16,6 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `account`
+--
+
+DROP TABLE IF EXISTS `account`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `account` (
+  `account_id` varchar(45) NOT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  `account_type` varchar(45) DEFAULT NULL,
+  `active_status` int DEFAULT NULL,
+  `associated_id` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`account_id`),
+  UNIQUE KEY `account_id_UNIQUE` (`account_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `account`
+--
+
+LOCK TABLES `account` WRITE;
+/*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` VALUES ('admin','p1234','dba',1,NULL),('newAcc','pw1234','dba',1,NULL),('newAcc2','1234','student',1,'149514909'),('regEx','1234','registrar',1,'987555444');
+/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `course_enrollment`
 --
 
@@ -87,7 +115,7 @@ CREATE TABLE `course_staff` (
 
 LOCK TABLES `course_staff` WRITE;
 /*!40000 ALTER TABLE `course_staff` DISABLE KEYS */;
-INSERT INTO `course_staff` VALUES ('COSC1046','206284373','1'),('COSC1046','290012791','1'),('COSC1047','206284373','1'),('COSC1047','224606575','1'),('COSC2006','206284373','3'),('COSC2006','280281430','3'),('COSC2007','206284373','1'),('COSC2007','290012791','1'),('COSC2406','206284373','1'),('COSC2406','296583945','1');
+INSERT INTO `course_staff` VALUES ('COSC1046','206284373','1'),('COSC1046','290012791','1'),('COSC1047','206284373','1'),('COSC1047','224606575','1'),('COSC2006','206284373','3'),('COSC2006','280281430','3'),('COSC2007','206284373','1'),('COSC2007','290012791','1'),('COSC2406','206284373','1'),('COSC2406','296583945','2');
 /*!40000 ALTER TABLE `course_staff` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +173,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES ('102092066','Auroora','Seal','812-919-9575','B.Sc.4 COSC','0',1,'full'),('102092067','javastufirst','asd','710-281-5777','B.Sc.4 COSC','1',0,'full'),('110617644','Shelden','Wilshere','676-785-2186','B.Sc.4 COSC','1',1,'full'),('111222333','Test','Student','123-999-0000','B.Sc.4 COSC','1',1,'full'),('113192860','Corabella','Folkerts','976-781-4135','B.Sc.4 COSC','1',0,'full'),('119352673','Edgardo','Duffield','238-831-3473','B.Sc.4 COSC','1',1,'full'),('126293548','Lina','McMichell','594-152-7101','B.Sc.3 COSC','1',1,'full'),('133706887','Mervin','Meriel','982-499-7103','B.Sc.4 COSC','0',0,'full'),('135001493','Shirley','Birchill','451-589-3285','B.Sc.4 COSC','1',1,'full'),('135490765','Retha','Keeves','266-986-1108','B.Sc.4 CHEM','0',0,'part'),('142531308','Cristy','Udie','522-232-2502','B.Sc.4 CHEM','1',1,'full'),('149514909','Wye','Malt','269-174-2488','B.Sc.4 CHEM','1',0,'full'),('158900905','Pammi','Dalston','791-690-5034','B.Sc.4 COSC','0',0,'full'),('164399245','Lindsey','Michelle','161-448-9685','B.Sc.3 COSC','1',1,'part'),('165816940','Lezley','Dodworth','165-259-5954','B.Sc.3 COSC','0',1,'part'),('172525649','Etti','Bradnick','470-871-4905','B.Sc.4 COSC','1',1,'full'),('172681923','Nickolas','Faldo','873-908-2033','B.Sc.4 COSC','0',0,'full'),('177252841','Ermengarde','Camm','660-560-2504','B.Sc.4 COSC','1',0,'full'),('179918802','Martyn','Minifie','433-467-6818','B.Sc.4 COSC','1',1,'full'),('184072320','Ralf','Auden','691-458-3117','B.Sc.3 COSC','1',0,'part'),('184225365','Vinson','Trathen','372-653-9784','B.Sc.4 COSC','1',1,'full'),('190801497','Solomon','Tyce','512-308-5927','B.Sc.4 CHEM','1',0,'full');
+INSERT INTO `student` VALUES ('102092066','Auroora','Seal','812-919-9575','B.Sc.4 COSC','0',1,'full'),('102092067','javastufirst','asd','710-281-5777','B.Sc.4 COSC','1',0,'full'),('110617644','Shelden','Wilshere','676-785-2186','B.Sc.4 COSC','1',1,'full'),('111222333','Test','Student','123-999-0000','B.Sc.4 COSC','1',1,'full'),('113192860','Corabella','Folkerts','976-781-4135','B.Sc.4 COSC','1',0,'full'),('119352673','Edgardo','Duffield','238-831-3473','B.Sc.4 COSC','1',1,'full'),('126293548','Lina','McMichell','594-152-7101','B.Sc.3 COSC','1',1,'full'),('133706887','Mervin','Meriel','982-499-7103','B.Sc.4 COSC','0',0,'full'),('135001493','Shirley','Birchill','451-589-3285','B.Sc.4 COSC','1',1,'full'),('135490765','Retha','Keeves','266-986-1108','B.Sc.4 CHEM','0',0,'part'),('142531308','Cristy','Udie','522-232-2502','B.Sc.4 CHEM','1',1,'full'),('149514909','newFirstName','newLastName','270-174-2488','B.Sc.4 COSC','0',1,'full'),('158900905','Pammi','Dalston','791-690-5034','B.Sc.4 COSC','0',0,'full'),('164399245','Lindsey','Michelle','161-448-9685','B.Sc.3 COSC','1',1,'part'),('165816940','Lezley','Dodworth','165-259-5954','B.Sc.3 COSC','0',1,'part'),('172525649','Etti','Bradnick','470-871-4905','B.Sc.4 COSC','1',1,'full'),('172681923','Nickolas','Faldo','873-908-2033','B.Sc.4 COSC','0',0,'full'),('177252841','Ermengarde','Camm','660-560-2504','B.Sc.4 COSC','1',0,'full'),('179918802','Martyn','Minifie','433-467-6818','B.Sc.4 COSC','1',1,'full'),('184072320','Ralf','Auden','691-458-3117','B.Sc.3 COSC','1',0,'part'),('184225365','Vinson','Trathen','372-653-9784','B.Sc.4 COSC','1',1,'full'),('190801497','Solomon','Tyce','512-308-5927','B.Sc.4 CHEM','1',0,'full');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-26 20:52:31
+-- Dump completed on 2021-11-28 18:12:54

@@ -14,11 +14,11 @@ public class ClientAccess {
 
 	public static void main(String[] args) {
 
-		JDBCDriver client = new JDBCDriver();
-		
-		Scanner sc = new Scanner(System.in);
+		// Menu system with roles
+		JDBCDriver client1 = new JDBCDriver();
 		
 		// Testing form and report information
+		//JDBCDriver client2 = new JDBCDriver(true);
 		
 		// *** Forms ***
 		//client.clientAddFacultyMemberToStaff("206284374", "javaTest", "javaLastJava", "230-187-8998");
@@ -34,6 +34,7 @@ public class ClientAccess {
 		//client.clientGetStudentsInProgram("B.SC.4 COSC");
 		//client.clientGetInstructorsForSpecificStudent("179918802", "2021F");
 		//client.clientGetCoursesByFaculty("206284373", "2021F");
+		//client.clientGetClassListForProfessor("296583945");
 	}
 
 }
