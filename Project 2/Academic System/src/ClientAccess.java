@@ -15,18 +15,18 @@ public class ClientAccess {
 	public static void main(String[] args) {
 
 		// Menu system with roles
-		JDBCDriver client1 = new JDBCDriver();
+		JDBCDriver client = new JDBCDriver();
 		
 		// Testing form and report information
-		//JDBCDriver client2 = new JDBCDriver(true);
+		//JDBCDriver client = new JDBCDriver(true);
 		
 		// *** Forms ***
-		//client.clientAddFacultyMemberToStaff("206284374", "javaTest", "javaLastJava", "230-187-8998");
-		//client.clientRegisterStudent("102092067", "javastufirst", "asd", "710-281-5777", "B.Sc.4 COSC", "1", 0, "full");
-		//client.clientAssignFaculty("COSC2007", "206284373", "1");
+		//client.clientAddFacultyMemberToStaff("206284377", "NewFacultyMember", "TheirNewLastName", "230-187-1111");
+		//client.clientRegisterStudent("102092063", "anotherJavaStudent", "aNewLastName", "710-991-5777", "B.Sc.4 COSC", "1", 1, "part");
+		//client.clientAssignFaculty("COSC1046", "296583945", "1");
 		//client.clientEnrollStudent("COSC2007", "177252841", "1");
 		//client.clientDeleteStudent("COSC2007", "177252841", "1");
-		//client.clientAlterStudentRecord("COSC1046", "126293548", "1", "65");
+		//client.clientAlterStudentRecord("COSC1046", "126293548", "1", "81");
 		
 		// *** Reports ***
 		//client.clientGetClassList("COSC1046", "1", "2021F");

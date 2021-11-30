@@ -218,7 +218,8 @@ public class JDBCDriver {
 					System.out.print("Enter phone number: ");
 					String newPN = input.next();
 					System.out.print("Enter program name: ");
-					String newProName = input.next();
+					String clearSc = input.nextLine();
+					String newProName = input.nextLine();
 					System.out.print("Enter term status (1, 0): ");
 					String newTerm = input.next();
 					System.out.print("Enter co-op status (1, 0): ");
